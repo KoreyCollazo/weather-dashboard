@@ -134,7 +134,7 @@ function searchHistory(){
     };  
     searchHistoryList.addEventListener("click", function(event){
         var cityValue = event.target.textContent
-        var map_api = 'http://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
+        var map_api = 'https://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
         function locationToChords() {
             fetch(map_api)
                 .then(response => {return response.json()})
