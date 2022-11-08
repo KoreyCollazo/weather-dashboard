@@ -8,6 +8,12 @@ $("#date3").text(today.add(1, 'days').format("l"));
 $("#date4").text(today.add(1, 'days').format("l"));
 $("#date5").text(today.add(1, 'days').format("l"));
 
+document.getElementById("clear-history").addEventListener("click", function(){
+    localStorage.setItem('allCities', "[]")
+    var searchHistoryTxt = document.getElementById("search-history")
+    removeAllChildNodes(searchHistoryTxt)
+})
+
 //Default weather onLoad
 var weather_api = 'https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
 async function defaultWeather() {
@@ -62,8 +68,7 @@ searchForm.addEventListener("submit", function(event){
                 localStorage.setItem("init-data", "true")
             
                 var allCities = []
-            allCities.push(JSON.parse(localStorage.getItem("city")));
-            localStorage.setItem('allCities', JSON.stringify(allCities));
+                localStorage.setItem('allCities', JSON.stringify(allCities));
             }
             var initData = localStorage.getItem("init-data")
             if (initData = "true"){
@@ -78,10 +83,9 @@ searchForm.addEventListener("submit", function(event){
             })
         // Create search history buttons on search
         .then(function(){
-            var cityButton = document.createElement("button");
-            cityButton.setAttribute("class", "search-history-button");
-            cityButton.textContent = JSON.parse(localStorage.getItem("city"));
-            document.getElementById("search-history").appendChild(cityButton);
+            
+            searchHistory()
+
         })    
         .then(function(){
             var choords = JSON.parse(localStorage.getItem("choords"))
@@ -123,6 +127,8 @@ searchForm.addEventListener("submit", function(event){
 
 //Preform search from history buttons
 function searchHistory(){
+    var searchHistory = document.getElementById("search-history")
+    removeAllChildNodes(searchHistory)
     var allCities = JSON.parse(localStorage.getItem("allCities"))
     var allCitiesLength = allCities.length
     var searchHistoryList = document.getElementById("search-history")
@@ -160,12 +166,6 @@ function searchHistory(){
                     localStorage.setItem("choords", JSON.stringify(choords))
                     })
                 .then(function(){
-                    var cityButton = document.createElement("button");
-                    cityButton.setAttribute("class", "search-history-button");
-                    cityButton.textContent = JSON.parse(localStorage.getItem("city"));
-                    document.getElementById("search-history").appendChild(cityButton);
-                })
-                .then(function(){
                     var choords = JSON.parse(localStorage.getItem("choords"))
                     var searchWeatherApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+choords[0]+'&lon='+choords[1]+'&units=imperial&&appid=17bd6f57b113fadbf97777a7da55a3ca'
                     return fetch(searchWeatherApi)
@@ -201,16 +201,12 @@ function searchHistory(){
                 .finally(() => console.log("this is the end of the fetch request"))
             }
             locationToChords()
+            
     console.log("search")
     })
 }
 searchHistory()
 
-document.getElementById("clear-history").addEventListener("click", function(){
-    localStorage.setItem('allCities', "[]")
-    var searchHistory = document.getElementById("search-history")
-    removeAllChildNodes(searchHistory)
-})
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
