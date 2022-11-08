@@ -64,7 +64,6 @@ searchForm.addEventListener("submit", function(event){
                 var allCities = []
             allCities.push(JSON.parse(localStorage.getItem("city")));
             localStorage.setItem('allCities', JSON.stringify(allCities));
-            return;
             }
             var initData = localStorage.getItem("init-data")
             if (initData = "true"){
