@@ -9,7 +9,7 @@ $("#date4").text(today.add(1, 'days').format("l"));
 $("#date5").text(today.add(1, 'days').format("l"));
 
 //Default weather onLoad
-var weather_api = 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
+var weather_api = 'https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
 async function defaultWeather() {
     const responce = await fetch(weather_api);
     const data = await responce.json();
@@ -23,7 +23,7 @@ async function defaultWeather() {
 }
 defaultWeather()
 
-var forecast_url = 'http://api.openweathermap.org/data/2.5/forecast?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
+var forecast_url = 'https://api.openweathermap.org/data/2.5/forecast?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
 async function defaultForecastWeather() {
     const responce = await fetch(forecast_url);
     const data = await responce.json();
@@ -51,7 +51,7 @@ var searchForm = document.querySelector("form");
 searchForm.addEventListener("submit", function(event){
     event.preventDefault()
     var cityValue = document.getElementById("city-search").value
-    var map_api = 'http://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
+    var map_api = 'https://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
 
     function locationToChords() {
     fetch(map_api)
