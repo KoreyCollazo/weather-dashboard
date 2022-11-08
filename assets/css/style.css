@@ -1,0 +1,114 @@
+body {
+margin: 0%;
+}
+
+/* header */
+h1 {
+    margin: 0%;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient(to right, rgb(87, 98, 213) , #3e2d70);
+    font-size: 45px;
+    padding: 20px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* search area */
+.container {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.col-3 {
+    padding-left: 8px;
+    padding-right: 25px;
+}
+
+h2 {
+    font-family: Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+form {
+    padding-bottom: 25px;
+    border-bottom: grey 2px solid;
+}
+
+#city-search {
+    margin-top: 20px;
+    width: 100%;
+    padding-left: 5px;
+    font-size: 25px;
+    border-color: black;
+    border-radius: 5px;
+}
+
+#search-submit {
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    background-color: rgb(109, 140, 232);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
+/* Current weather info */
+
+.col-9 h2 {
+    border-top: black 2px solid;
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+    padding-left: 10px;
+    margin-bottom: 0%;
+}
+
+.col-9 p {
+    border-bottom: black 2px solid;
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+    padding-left: 10px;
+}
+
+/* Search History */
+.search-history-button {
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    background-color: rgb(109, 140, 232);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    width: 100%;
+}
+
+#clear-history {
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    background-color:  #3e2d70;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    width: 100%;
+}
+
+h3 {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.col-2 {
+    margin-top: 30px;
+    padding-top: 10px;
+    width: 13%;
+    background-color: #3e2d70;
+    color: white;
+    margin-left: 20px;
+}
