@@ -8,11 +8,15 @@ $("#date3").text(today.add(1, 'days').format("l"));
 $("#date4").text(today.add(1, 'days').format("l"));
 $("#date5").text(today.add(1, 'days').format("l"));
 
-document.getElementById("clear-history").addEventListener("click", function(){
+
+//clear history
+function clearHistory(){
     localStorage.setItem('allCities', "[]")
-    var searchHistoryTxt = document.getElementById("search-history")
-    removeAllChildNodes(searchHistoryTxt)
-})
+    removeAllChildNodes(document.getElementById("search-history"))
+    removeAllChildNodes(document.getElementById("search-history-mobile"))
+}
+document.getElementById("clear-history").addEventListener("click", clearHistory)
+document.getElementById("clear-history-mobile").addEventListener("click", clearHistory)
 
 //Default weather onLoad
 var weather_api = 'https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=imperial&APPID=17bd6f57b113fadbf97777a7da55a3ca'
@@ -53,11 +57,27 @@ async function defaultForecastWeather() {
 defaultForecastWeather()
 
 //Search Weather
-var searchForm = document.querySelector("form");
-searchForm.addEventListener("submit", function(event){
+let searchFormMobile = document.getElementById("form-mobile")
+var searchForm = document.getElementById("form-desktop");
+searchForm.addEventListener("submit", searchWeather)
+searchFormMobile.addEventListener("submit", searchWeather)
+
+function searchWeather (event){
     event.preventDefault()
+
     var cityValue = document.getElementById("city-search").value
-    var map_api = 'https://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
+    var cityValueMobile = document.getElementById("city-search-mobile").value
+    
+    function mobile(cityValue, cityValueMobile) {
+        if (cityValue === ""){
+            return cityValueMobile;
+        } else {
+            return cityValue;
+        }
+    }
+    
+
+    var map_api = 'https://api.openweathermap.org/geo/1.0/direct?q='+mobile(cityValue, cityValueMobile)+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
 
     function locationToChords() {
     fetch(map_api)
@@ -123,7 +143,7 @@ searchForm.addEventListener("submit", function(event){
         .finally(() => console.log("this is the end of the fetch request"))
     }
     locationToChords()
-})
+}
 
 //Preform search from history buttons
 function searchHistory(){
@@ -132,13 +152,27 @@ function searchHistory(){
     var allCities = JSON.parse(localStorage.getItem("allCities"))
     var allCitiesLength = allCities.length
     var searchHistoryList = document.getElementById("search-history")
+
+    var searchHistoryMobile = document.getElementById("search-history-mobile")
+    removeAllChildNodes(searchHistoryMobile)
+    var searchHistoryListMobile = document.getElementById("search-history-mobile")
+
     for(let i = 0; i < allCitiesLength; i++){
         var cityButton = document.createElement("button")
         cityButton.setAttribute("class", "search-history-button")
         cityButton.textContent = allCities[i]
         searchHistoryList.appendChild(cityButton)
+
+        var cityButtonMobile = document.createElement("button")
+        cityButtonMobile.setAttribute("class", "search-history-button-mobile")
+        cityButtonMobile.textContent = allCities[i]
+        searchHistoryListMobile.appendChild(cityButtonMobile)
     };  
-    searchHistoryList.addEventListener("click", function(event){
+   
+    searchHistoryList.addEventListener("click", searchHistoryButtons)
+    searchHistoryListMobile.addEventListener("click", searchHistoryButtons)
+
+    function searchHistoryButtons (event){
         var cityValue = event.target.textContent
         var map_api = 'https://api.openweathermap.org/geo/1.0/direct?q='+cityValue+'&limit=1&appid=17bd6f57b113fadbf97777a7da55a3ca'
         function locationToChords() {
@@ -203,7 +237,7 @@ function searchHistory(){
             locationToChords()
             
     console.log("search")
-    })
+    }
 }
 searchHistory()
 
@@ -214,3 +248,16 @@ function removeAllChildNodes(parent) {
     }
 }
 
+const openMenuBtn = document.getElementById('open-menu');
+const closeMenuBtn = document.getElementById('close-menu');
+const overlayMenu = document.getElementById('overlay-menu');
+
+openMenuBtn.addEventListener('click', () => {
+  overlayMenu.classList.add('open');
+  openMenuBtn.classList.add('open');
+});
+
+closeMenuBtn.addEventListener('click', () => {
+  overlayMenu.classList.remove('open');
+  openMenuBtn.classList.remove('open');
+});
