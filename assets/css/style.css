@@ -65,8 +65,9 @@ form {
     width: 100%;
     padding-left: 5px;
     font-size: 25px;
-    border-color: black;
-    border-radius: 5px;
+    border: rgb(255, 255, 255) 3px solid;
+    background-color: rgba(255, 255, 255, 0.539);
+    border-radius: 10px;
 }
 
 #search-submit {
@@ -83,20 +84,18 @@ form {
 /* Current weather info */
 
 .col-9 h2 {
-    border-top: black 2px solid;
-    border-left: black 2px solid;
-    border-right: black 2px solid;
     padding-left: 10px;
     margin-bottom: 0%;
-    background-color: rgba(255, 255, 255, .539);
+}
+
+.forecast {
+    border: rgb(255, 255, 255) 5px solid;
+    background-color: rgba(255, 255, 255, 0.539);
+    border-radius: 10px;
 }
 
 .col-9 p {
-    border-bottom: black 2px solid;
-    border-left: black 2px solid;
-    border-right: black 2px solid;
     padding-left: 10px;
-    background-color: rgba(255, 255, 255, 0.539);
 }
 
 #overlay-menu {
